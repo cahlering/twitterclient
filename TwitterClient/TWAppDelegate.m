@@ -7,6 +7,9 @@
 //
 
 #import "TWAppDelegate.h"
+#import "clients/TWAPIClient.h"
+#import "controllers/TWLandingViewController.h"
+#import "controllers/TWTimelineTableViewController.h"
 
 @implementation TWAppDelegate
 
@@ -16,6 +19,9 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    TWLandingViewController *landingView = [[TWLandingViewController alloc]init];
+    UINavigationController *rvc = [[UINavigationController alloc]initWithRootViewController:landingView];
+    self.window.rootViewController = rvc;
     return YES;
 }
 
@@ -46,4 +52,17 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+
+    TWAPIClient *client = [TWAPIClient instance];
+    [client handleAuthenticationRedirectParameters:[url query] success:^{
+        if ([client isAuthorized]) {
+            UINavigationController *navController = (UINavigationController *)self.window.rootViewController;
+            [navController pushViewController:[[TWTimelineTableViewController alloc] init] animated:YES];
+        }
+    }];
+
+    return YES;
+}
 @end
