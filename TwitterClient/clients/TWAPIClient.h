@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Chris Ahlering. All rights reserved.
 //
 
-#import "BDBOAuth1RequestOperationManager.h"
+#import "BDBOAuth1SessionManager.h"
 
-@interface TWAPIClient : BDBOAuth1RequestOperationManager
+@interface TWAPIClient : BDBOAuth1SessionManager
 
 + (TWAPIClient *)instance;
 
@@ -16,11 +16,11 @@
 
 - (void) handleAuthenticationRedirectParameters: (NSString *)authenticationParameters success:(void(^)(void))success;
 
-- (void)homeTimeline :(void(^)(NSArray *tweets))callback;
+- (void)homeTimelineWithIndexAndBefore :(NSString*)index before:(BOOL)before :(void(^)(NSArray *tweets))callback;
 
 - (void) tweet;
 
-- (void) reTweetById: (NSInteger *)tweetToRetweet;
+- (void) reTweetById: (NSString *)tweetToRetweet;
 
 
 @end

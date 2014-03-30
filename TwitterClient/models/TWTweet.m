@@ -9,5 +9,13 @@
 #import "TWTweet.h"
 
 @implementation TWTweet
+-(id)init {
+    if (self = [super init]) {
+        self.propertyMap = @{
+                             @"id_str": @"idString"
+                             };
+    }
+    return self;
+}
 
 @end

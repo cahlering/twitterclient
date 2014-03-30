@@ -11,6 +11,8 @@
 
 @interface TWTweet : MUJSONResponseObject
 
+@property (nonatomic) long *id;
+@property (strong, nonatomic) NSString *idString;
 @property (strong, nonatomic) NSString *text;
 @property (strong, nonatomic) TWUser *user;
 

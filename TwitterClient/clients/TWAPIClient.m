@@ -44,26 +44,30 @@
     }];
 }
 
-- (void)homeTimeline :(void (^)(NSArray *tweets))callback
+- (void)homeTimelineWithIndexAndBefore :(NSString *)index before:(BOOL)before :(void (^)(NSArray *tweets))callback
 {
-    NSError *localerror;
-    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%@:%@/%@", self.baseURL.scheme, self.baseURL.host, @"1.1/statuses/home_timeline"] parameters:nil error:&localerror];
-    
-    if (localerror) {
-        //error handler
-    }
-    
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        callback(responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Timeline error: %@", error);
-    }];
     
     MUJSONResponseSerializer *tweetSerializer = [[MUJSONResponseSerializer alloc]init];
     [tweetSerializer setResponseObjectClass:[TWTweet class]];
-    [operation setResponseSerializer:tweetSerializer];
+    [self setResponseSerializer:tweetSerializer];
     
-    [operation start];
+    NSDictionary *callParameters;
+    if (index) {
+        NSString *indexParameterName;
+        if (before) {
+            indexParameterName = @"max_id";
+        } else {
+            indexParameterName = @"since_id";
+        }
+        callParameters = @{indexParameterName : index};
+    }
+    
+    [self GET:[NSString stringWithFormat:@"%@://%@/%@", self.baseURL.scheme, self.baseURL.host, @"1.1/statuses/home_timeline.json"] parameters:callParameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        callback(responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Timeline error: %@", error);
+    }];
+    
 }
 
 

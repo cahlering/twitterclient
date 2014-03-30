@@ -40,18 +40,31 @@
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
     [self.tableView addSubview:refreshControl];
     
-    [[TWAPIClient instance]homeTimeline:^(NSArray *tweets) {
-        for (TWTweet *tweet in tweets) {
-            [self.tweetList addObject:tweet];
-        }
+    self.tweetList = [[NSMutableArray alloc]init];
+    [self showHomeTimelineFromTweetIdAndNewer:nil newer:NO];
+}
+
+-(void)showHomeTimelineFromTweetIdAndNewer :(NSString *)tweetIndex newer:(BOOL)newer
+{
+    [[TWAPIClient instance]homeTimelineWithIndexAndBefore:tweetIndex before:newer :^(NSArray *tweets) {
+        [self.tweetList addObjectsFromArray:tweets];
+        [self.tableView reloadData];
     }];
+    
 }
 
 -(void)refresh:(UIRefreshControl *)refreshControl
 {
     NSLog(@"Refresh");
-    sleep(1);
-    [refreshControl endRefreshing];
+    TWTweet *newestTweet = [self.tweetList objectAtIndex:0];
+    
+    [[TWAPIClient instance]homeTimelineWithIndexAndBefore:[newestTweet idString] before:NO :^(NSArray *tweets) {
+        NSMutableArray *newTweets = [tweets mutableCopy];
+        [newTweets addObjectsFromArray:self.tweetList];
+        self.tweetList = newTweets;
+        [self.tableView reloadData];
+        [refreshControl endRefreshing];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,7 +84,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 4;
+    return [self.tweetList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

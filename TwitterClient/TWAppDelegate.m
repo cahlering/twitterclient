@@ -19,9 +19,14 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    TWLandingViewController *landingView = [[TWLandingViewController alloc]init];
-    //landingView = [[TWTimelineTableViewController alloc]init];
-    UINavigationController *rvc = [[UINavigationController alloc]initWithRootViewController:landingView];
+
+    UINavigationController *rvc;
+    if ([[TWAPIClient instance] isAuthorized]) {
+        rvc = [[UINavigationController alloc]initWithRootViewController:[[TWTimelineTableViewController alloc]init]];
+    } else {
+        rvc = [[UINavigationController alloc]initWithRootViewController:[[TWLandingViewController alloc]init]];
+    }
+
     self.window.rootViewController = rvc;
     return YES;
 }
