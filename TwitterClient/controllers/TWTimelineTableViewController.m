@@ -7,12 +7,20 @@
 //
 
 #import "TWTimelineTableViewController.h"
+#import "../views/TWTweetCell.h"
+#import "../clients/TWAPIClient.h"
 
 @interface TWTimelineTableViewController ()
 
+
+@property (strong, nonatomic) TWTweetCell *offScreenCell;
+
+@property (strong, nonatomic) NSMutableArray *tweetList;
 @end
 
 @implementation TWTimelineTableViewController
+
+
 
 - (void)viewDidLoad
 {
@@ -23,6 +31,27 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UINib *tweetCellNib = [UINib nibWithNibName:@"TWTweetCell" bundle:nil];
+    [self.tableView registerNib:tweetCellNib forCellReuseIdentifier: @"TWTweetCell"];
+    
+    // refresh on pull
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    [self.tableView addSubview:refreshControl];
+    
+    [[TWAPIClient instance]homeTimeline:^(NSArray *tweets) {
+        for (TWTweet *tweet in tweets) {
+            [self.tweetList addObject:tweet];
+        }
+    }];
+}
+
+-(void)refresh:(UIRefreshControl *)refreshControl
+{
+    NSLog(@"Refresh");
+    sleep(1);
+    [refreshControl endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,29 +64,49 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 4;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    TWTweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TWTweetCell" forIndexPath:indexPath];
     
-    // Configure the cell...
-    
+    TWTweet *tweet = [self.tweetList objectAtIndex:indexPath.row];
+    [cell setTweet:tweet];
     return cell;
 }
-*/
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if (_offScreenCell == nil) {
+        _offScreenCell = [[TWTweetCell alloc]init];
+    }
+    TWTweet * tweet = [[TWTweet alloc]init];
+    NSMutableString *tweetStr = [[NSMutableString alloc]initWithString:@"How did this get made?!"];
+    for (int i = 0; i < indexPath.row; i++) {
+        [tweetStr appendString:@" hpoe"];
+    }
+    tweet.text = [NSString stringWithString:tweetStr];
+    [_offScreenCell setTweet:tweet];
+
+    [_offScreenCell.contentView layoutSubviews];
+    CGSize contentViewSize = [_offScreenCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+
+    UIFont *font = [UIFont boldSystemFontOfSize:15];
+    CGSize maxLabelSize = CGSizeMake(232, 9999);
+    CGRect expectedLabelSize = [_offScreenCell.tweet.text boundingRectWithSize:maxLabelSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: font} context:nil ];
+    
+    //return contentViewSize.height + expectedLabelSize.size.height;
+    return 150;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

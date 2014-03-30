@@ -16,7 +16,7 @@
 
 - (void) handleAuthenticationRedirectParameters: (NSString *)authenticationParameters success:(void(^)(void))success;
 
-- (NSArray *)homeTimeline;
+- (void)homeTimeline :(void(^)(NSArray *tweets))callback;
 
 - (void) tweet;
 

@@ -14,6 +14,11 @@
 		95868D2B18E73FC5001778E4 /* TWTimelineTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95868D2918E73FC5001778E4 /* TWTimelineTableViewController.xib */; };
 		95868D2E18E74062001778E4 /* TWAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 95868D2D18E74062001778E4 /* TWAPIClient.m */; };
 		95868D3118E749E6001778E4 /* TWTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95868D3018E749E6001778E4 /* TWTweet.m */; };
+		95868D3A18E78116001778E4 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95868D3918E78116001778E4 /* Media.xcassets */; };
+		95868D3E18E784BE001778E4 /* TWTweetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95868D3B18E784BE001778E4 /* TWTweetCell.xib */; };
+		95868D3F18E784BE001778E4 /* TWTweetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95868D3D18E784BE001778E4 /* TWTweetCell.m */; };
+		95868D4218E788F7001778E4 /* TWUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 95868D4118E788F7001778E4 /* TWUser.m */; };
+		95868D4418E7918E001778E4 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95868D4318E7918E001778E4 /* Reveal.framework */; };
 		95CC40AC18E3CE27001D1812 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95CC40AB18E3CE27001D1812 /* Foundation.framework */; };
 		95CC40AE18E3CE27001D1812 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95CC40AD18E3CE27001D1812 /* CoreGraphics.framework */; };
 		95CC40B018E3CE27001D1812 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95CC40AF18E3CE27001D1812 /* UIKit.framework */; };
@@ -51,6 +56,13 @@
 		95868D2D18E74062001778E4 /* TWAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWAPIClient.m; path = clients/TWAPIClient.m; sourceTree = "<group>"; };
 		95868D2F18E749E6001778E4 /* TWTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWTweet.h; path = models/TWTweet.h; sourceTree = "<group>"; };
 		95868D3018E749E6001778E4 /* TWTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWTweet.m; path = models/TWTweet.m; sourceTree = "<group>"; };
+		95868D3918E78116001778E4 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		95868D3B18E784BE001778E4 /* TWTweetCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TWTweetCell.xib; path = views/TWTweetCell.xib; sourceTree = "<group>"; };
+		95868D3C18E784BE001778E4 /* TWTweetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWTweetCell.h; path = views/TWTweetCell.h; sourceTree = "<group>"; };
+		95868D3D18E784BE001778E4 /* TWTweetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWTweetCell.m; path = views/TWTweetCell.m; sourceTree = "<group>"; };
+		95868D4018E788F7001778E4 /* TWUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWUser.h; path = models/TWUser.h; sourceTree = "<group>"; };
+		95868D4118E788F7001778E4 /* TWUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWUser.m; path = models/TWUser.m; sourceTree = "<group>"; };
+		95868D4318E7918E001778E4 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		95CC40A818E3CE27001D1812 /* TwitterClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95CC40AB18E3CE27001D1812 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		95CC40AD18E3CE27001D1812 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -76,6 +88,7 @@
 			files = (
 				95CC40AE18E3CE27001D1812 /* CoreGraphics.framework in Frameworks */,
 				95CC40B018E3CE27001D1812 /* UIKit.framework in Frameworks */,
+				95868D4418E7918E001778E4 /* Reveal.framework in Frameworks */,
 				95CC40AC18E3CE27001D1812 /* Foundation.framework in Frameworks */,
 				022E166C6E3C4434AA03BB16 /* libPods.a in Frameworks */,
 			);
@@ -106,6 +119,9 @@
 		95868D1F18E73EAD001778E4 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				95868D3B18E784BE001778E4 /* TWTweetCell.xib */,
+				95868D3C18E784BE001778E4 /* TWTweetCell.h */,
+				95868D3D18E784BE001778E4 /* TWTweetCell.m */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -128,6 +144,8 @@
 			children = (
 				95868D2F18E749E6001778E4 /* TWTweet.h */,
 				95868D3018E749E6001778E4 /* TWTweet.m */,
+				95868D4018E788F7001778E4 /* TWUser.h */,
+				95868D4118E788F7001778E4 /* TWUser.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -155,6 +173,7 @@
 		95CC40AA18E3CE27001D1812 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				95868D4318E7918E001778E4 /* Reveal.framework */,
 				95CC40AB18E3CE27001D1812 /* Foundation.framework */,
 				95CC40AD18E3CE27001D1812 /* CoreGraphics.framework */,
 				95CC40AF18E3CE27001D1812 /* UIKit.framework */,
@@ -186,6 +205,7 @@
 				95CC40B418E3CE27001D1812 /* InfoPlist.strings */,
 				95CC40B718E3CE27001D1812 /* main.m */,
 				95CC40B918E3CE27001D1812 /* TwitterClient-Prefix.pch */,
+				95868D3918E78116001778E4 /* Media.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -288,7 +308,9 @@
 			files = (
 				95CC40B618E3CE27001D1812 /* InfoPlist.strings in Resources */,
 				95868D2B18E73FC5001778E4 /* TWTimelineTableViewController.xib in Resources */,
+				95868D3E18E784BE001778E4 /* TWTweetCell.xib in Resources */,
 				95868D2618E73F38001778E4 /* TWLandingViewController.xib in Resources */,
+				95868D3A18E78116001778E4 /* Media.xcassets in Resources */,
 				95CC40BE18E3CE27001D1812 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,7 +366,9 @@
 				95CC40B818E3CE27001D1812 /* main.m in Sources */,
 				95868D2518E73F38001778E4 /* TWLandingViewController.m in Sources */,
 				95CC40BC18E3CE27001D1812 /* TWAppDelegate.m in Sources */,
+				95868D3F18E784BE001778E4 /* TWTweetCell.m in Sources */,
 				95868D2A18E73FC5001778E4 /* TWTimelineTableViewController.m in Sources */,
+				95868D4218E788F7001778E4 /* TWUser.m in Sources */,
 				95868D3118E749E6001778E4 /* TWTweet.m in Sources */,
 				95868D2E18E74062001778E4 /* TWAPIClient.m in Sources */,
 			);
@@ -464,6 +488,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TwitterClient/TwitterClient-Prefix.pch";
 				INFOPLIST_FILE = "TwitterClient/TwitterClient-Info.plist";
@@ -478,6 +506,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TwitterClient/TwitterClient-Prefix.pch";
 				INFOPLIST_FILE = "TwitterClient/TwitterClient-Info.plist";

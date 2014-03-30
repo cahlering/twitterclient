@@ -7,7 +7,11 @@
 //
 
 #import "MUJSONResponseSerializer.h"
+#import "TWUser.h"
 
 @interface TWTweet : MUJSONResponseObject
+
+@property (strong, nonatomic) NSString *text;
+@property (strong, nonatomic) TWUser *user;
 
 @end

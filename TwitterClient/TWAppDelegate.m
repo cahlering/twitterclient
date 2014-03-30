@@ -20,6 +20,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     TWLandingViewController *landingView = [[TWLandingViewController alloc]init];
+    //landingView = [[TWTimelineTableViewController alloc]init];
     UINavigationController *rvc = [[UINavigationController alloc]initWithRootViewController:landingView];
     self.window.rootViewController = rvc;
     return YES;

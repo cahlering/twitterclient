@@ -7,6 +7,7 @@
 //
 
 #import "TWAPIClient.h"
+#import "../models/TWTweet.h"
 
 @implementation TWAPIClient
 
@@ -41,6 +42,28 @@
     } failure:^(NSError *error) {
         NSLog(@"Authorization failure: %@", error);
     }];
+}
+
+- (void)homeTimeline :(void (^)(NSArray *tweets))callback
+{
+    NSError *localerror;
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"%@:%@/%@", self.baseURL.scheme, self.baseURL.host, @"1.1/statuses/home_timeline"] parameters:nil error:&localerror];
+    
+    if (localerror) {
+        //error handler
+    }
+    
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        callback(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Timeline error: %@", error);
+    }];
+    
+    MUJSONResponseSerializer *tweetSerializer = [[MUJSONResponseSerializer alloc]init];
+    [tweetSerializer setResponseObjectClass:[TWTweet class]];
+    [operation setResponseSerializer:tweetSerializer];
+    
+    [operation start];
 }
 
 
