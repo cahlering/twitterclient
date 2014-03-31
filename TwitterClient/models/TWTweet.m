@@ -12,8 +12,15 @@
 -(id)init {
     if (self = [super init]) {
         self.propertyMap = @{
-                             @"id_str": @"idString"
+                             @"id_str": @"idString",
+                             @"created_at": @"createdAt",
+                             @"retweet_count": @"retweetCount",
+                             @"favorite_count": @"favoriteCount",
+                             @"current_user_retweet": @"currentUserRetweet"
                              };
+        
+        [self.dateFormatter setDateFormat:@"EEE MMM d HH:mm:ss Z y"];
+
     }
     return self;
 }

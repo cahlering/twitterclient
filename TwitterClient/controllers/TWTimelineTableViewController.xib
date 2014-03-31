@@ -6,21 +6,60 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TWTimelineTableViewController">
             <connections>
-                <outlet property="tableView" destination="i5M-Pr-FkT" id="hjJ-12-7sn"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="tableView" destination="bZW-6S-p4Q" id="x0t-ta-KrF"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Lhj-xa-w1W"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="i5M-Pr-FkT">
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bZW-6S-p4Q">
+                    <rect key="frame" x="0.0" y="67" width="320" height="492"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="492" id="2Gk-G3-3wk"/>
+                        <constraint firstAttribute="width" constant="320" id="VNp-JJ-50g"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Tng-2m-Rnh"/>
+                        <outlet property="delegate" destination="-1" id="9aC-8N-iBw"/>
+                    </connections>
+                </tableView>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="18Q-rw-z9f">
+                    <rect key="frame" x="0.0" y="23" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="fL3-sD-KiP"/>
+                        <constraint firstAttribute="width" constant="320" id="uk6-Gl-UeF"/>
+                    </constraints>
+                    <items>
+                        <navigationItem title="Home" id="K7K-yt-qMK">
+                            <barButtonItem key="leftBarButtonItem" title="Sign Out" id="prU-tW-Byt">
+                                <connections>
+                                    <action selector="signOut:" destination="-1" id="NUS-kt-SNH"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" title="Tweet" id="HvQ-8d-N1X">
+                                <connections>
+                                    <action selector="compose:" destination="-1" id="UXK-i5-C1c"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="18Q-rw-z9f" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="23" id="0Dk-vO-ldi"/>
+                <constraint firstItem="bZW-6S-p4Q" firstAttribute="top" secondItem="18Q-rw-z9f" secondAttribute="bottom" id="gQ0-am-BcE"/>
+                <constraint firstItem="bZW-6S-p4Q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lRS-zq-zmB"/>
+                <constraint firstItem="18Q-rw-z9f" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rgS-Cc-gcs"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <connections>
-                <outlet property="dataSource" destination="-1" id="Tng-2m-Rnh"/>
-                <outlet property="delegate" destination="-1" id="9aC-8N-iBw"/>
-            </connections>
-        </tableView>
+        </view>
     </objects>
 </document>

@@ -7,6 +7,7 @@
 //
 
 #import "BDBOAuth1SessionManager.h"
+#import "../models/TWTweet.h"
 
 @interface TWAPIClient : BDBOAuth1SessionManager
 
@@ -16,11 +17,16 @@
 
 - (void) handleAuthenticationRedirectParameters: (NSString *)authenticationParameters success:(void(^)(void))success;
 
-- (void)homeTimelineWithIndexAndBefore :(NSString*)index before:(BOOL)before :(void(^)(NSArray *tweets))callback;
+- (void) homeTimelineWithIndexAndBefore :(NSString*)index before:(BOOL)before :(void(^)(NSArray *tweets))callback;
 
-- (void) tweet;
+- (void) currentUser :(void (^)(TWUser *user))callback;
 
-- (void) reTweetById: (NSString *)tweetToRetweet;
+- (void) tweet: (NSString *)status :(void (^)(TWTweet *tweet))callback;
 
+- (void) reTweet: (TWTweet *)tweetToRetweet :(void (^)(TWTweet *tweet))callback;
+
+- (void) favorite: (TWTweet *)tweetToFavorite remove:(BOOL)remove :(void (^)(TWTweet *tweet))callback;
+
+- (void) tweetAsReply: (NSString *)status :(void (^)(TWTweet *tweet))callback;
 
 @end

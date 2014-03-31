@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		022E166C6E3C4434AA03BB16 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6546F8B53C4C47ACBDB40C29 /* libPods.a */; };
+		950C489B18E8F05300F8CDCD /* TWTweetDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 950C489918E8F05300F8CDCD /* TWTweetDetailViewController.m */; };
+		950C489C18E8F05300F8CDCD /* TWTweetDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950C489A18E8F05300F8CDCD /* TWTweetDetailViewController.xib */; };
+		950C48A018E8FEB600F8CDCD /* TWTweetComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 950C489E18E8FEB600F8CDCD /* TWTweetComposeViewController.m */; };
+		950C48A118E8FEB600F8CDCD /* TWTweetComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950C489F18E8FEB600F8CDCD /* TWTweetComposeViewController.xib */; };
 		95868D2518E73F38001778E4 /* TWLandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95868D2318E73F38001778E4 /* TWLandingViewController.m */; };
 		95868D2618E73F38001778E4 /* TWLandingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95868D2418E73F38001778E4 /* TWLandingViewController.xib */; };
 		95868D2A18E73FC5001778E4 /* TWTimelineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95868D2818E73FC5001778E4 /* TWTimelineTableViewController.m */; };
@@ -46,6 +50,12 @@
 /* Begin PBXFileReference section */
 		6546F8B53C4C47ACBDB40C29 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B982B65F4DA46DF86198E81 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		950C489818E8F05300F8CDCD /* TWTweetDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWTweetDetailViewController.h; path = controllers/TWTweetDetailViewController.h; sourceTree = "<group>"; };
+		950C489918E8F05300F8CDCD /* TWTweetDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWTweetDetailViewController.m; path = controllers/TWTweetDetailViewController.m; sourceTree = "<group>"; };
+		950C489A18E8F05300F8CDCD /* TWTweetDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TWTweetDetailViewController.xib; path = controllers/TWTweetDetailViewController.xib; sourceTree = "<group>"; };
+		950C489D18E8FEB600F8CDCD /* TWTweetComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWTweetComposeViewController.h; path = controllers/TWTweetComposeViewController.h; sourceTree = "<group>"; };
+		950C489E18E8FEB600F8CDCD /* TWTweetComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWTweetComposeViewController.m; path = controllers/TWTweetComposeViewController.m; sourceTree = "<group>"; };
+		950C489F18E8FEB600F8CDCD /* TWTweetComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TWTweetComposeViewController.xib; path = controllers/TWTweetComposeViewController.xib; sourceTree = "<group>"; };
 		95868D2218E73F38001778E4 /* TWLandingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWLandingViewController.h; path = controllers/TWLandingViewController.h; sourceTree = "<group>"; };
 		95868D2318E73F38001778E4 /* TWLandingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWLandingViewController.m; path = controllers/TWLandingViewController.m; sourceTree = "<group>"; };
 		95868D2418E73F38001778E4 /* TWLandingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TWLandingViewController.xib; path = controllers/TWLandingViewController.xib; sourceTree = "<group>"; };
@@ -135,6 +145,12 @@
 				95868D2718E73FC5001778E4 /* TWTimelineTableViewController.h */,
 				95868D2818E73FC5001778E4 /* TWTimelineTableViewController.m */,
 				95868D2918E73FC5001778E4 /* TWTimelineTableViewController.xib */,
+				950C489818E8F05300F8CDCD /* TWTweetDetailViewController.h */,
+				950C489918E8F05300F8CDCD /* TWTweetDetailViewController.m */,
+				950C489A18E8F05300F8CDCD /* TWTweetDetailViewController.xib */,
+				950C489D18E8FEB600F8CDCD /* TWTweetComposeViewController.h */,
+				950C489E18E8FEB600F8CDCD /* TWTweetComposeViewController.m */,
+				950C489F18E8FEB600F8CDCD /* TWTweetComposeViewController.xib */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -306,9 +322,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				950C489C18E8F05300F8CDCD /* TWTweetDetailViewController.xib in Resources */,
 				95CC40B618E3CE27001D1812 /* InfoPlist.strings in Resources */,
 				95868D2B18E73FC5001778E4 /* TWTimelineTableViewController.xib in Resources */,
 				95868D3E18E784BE001778E4 /* TWTweetCell.xib in Resources */,
+				950C48A118E8FEB600F8CDCD /* TWTweetComposeViewController.xib in Resources */,
 				95868D2618E73F38001778E4 /* TWLandingViewController.xib in Resources */,
 				95868D3A18E78116001778E4 /* Media.xcassets in Resources */,
 				95CC40BE18E3CE27001D1812 /* Images.xcassets in Resources */,
@@ -369,7 +387,9 @@
 				95868D3F18E784BE001778E4 /* TWTweetCell.m in Sources */,
 				95868D2A18E73FC5001778E4 /* TWTimelineTableViewController.m in Sources */,
 				95868D4218E788F7001778E4 /* TWUser.m in Sources */,
+				950C489B18E8F05300F8CDCD /* TWTweetDetailViewController.m in Sources */,
 				95868D3118E749E6001778E4 /* TWTweet.m in Sources */,
+				950C48A018E8FEB600F8CDCD /* TWTweetComposeViewController.m in Sources */,
 				95868D2E18E74062001778E4 /* TWAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -62,7 +62,7 @@
         callParameters = @{indexParameterName : index};
     }
     
-    [self GET:[NSString stringWithFormat:@"%@://%@/%@", self.baseURL.scheme, self.baseURL.host, @"1.1/statuses/home_timeline.json"] parameters:callParameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self GET:@"1.1/statuses/home_timeline.json" parameters:callParameters success:^(NSURLSessionDataTask *task, id responseObject) {
         callback(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Timeline error: %@", error);
@@ -70,5 +70,60 @@
     
 }
 
+-(void)currentUser :(void (^)(TWUser *user))callback
+{
+    
+    MUJSONResponseSerializer *userSerializer = [[MUJSONResponseSerializer alloc]init];
+    [userSerializer setResponseObjectClass:[TWUser class]];
+    [self setResponseSerializer:userSerializer];
+    
+    [self GET:@"1.1/account/verify_credentials.json" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        callback((TWUser *)responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error getting account: %@", error);
+    }];
+}
+
+- (void)tweet:(NSString *)status :(void (^)(TWTweet *tweets))callback
+{
+    MUJSONResponseSerializer *tweetSerializer = [[MUJSONResponseSerializer alloc]init];
+    [tweetSerializer setResponseObjectClass:[TWTweet class]];
+    [self setResponseSerializer:tweetSerializer];
+
+    [self POST:@"1.1/statuses/update.json" parameters:@{@"status":status} constructingBodyWithBlock:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        callback((TWTweet *)responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error tweeting: %@", error);
+    }];
+}
+
+- (void)reTweet:(TWTweet *)tweet :(void (^)(TWTweet *))callback
+{
+    MUJSONResponseSerializer *tweetSerializer = [[MUJSONResponseSerializer alloc]init];
+    [tweetSerializer setResponseObjectClass:[TWTweet class]];
+    [self setResponseSerializer:tweetSerializer];
+    
+    [self POST:[NSString stringWithFormat:@"%@/%lld.json", @"1.1/statuses/retweet", tweet.id] parameters:nil constructingBodyWithBlock:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        callback((TWTweet *)responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error reTweeting: %@", error);
+    }];
+    
+}
+
+
+- (void)favorite:(TWTweet *)tweet remove:(BOOL)remove :(void (^)(TWTweet *))callback
+{
+    MUJSONResponseSerializer *tweetSerializer = [[MUJSONResponseSerializer alloc]init];
+    [tweetSerializer setResponseObjectClass:[TWTweet class]];
+    [self setResponseSerializer:tweetSerializer];
+    
+    [self POST:[NSString stringWithFormat:@"1.1/favorites/%@.json", (remove) ? @"destroy" : @"create" ] parameters:@{@"id": @(tweet.id)} constructingBodyWithBlock:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        callback((TWTweet *)responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error favoriting: %@", error);
+    }];
+    
+}
 
 @end

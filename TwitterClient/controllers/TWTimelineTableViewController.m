@@ -6,7 +6,10 @@
 //  Copyright (c) 2014 Chris Ahlering. All rights reserved.
 //
 
+#import "TWLandingViewController.h"
 #import "TWTimelineTableViewController.h"
+#import "TWTweetDetailViewController.h"
+#import "TWTweetComposeViewController.h"
 #import "../views/TWTweetCell.h"
 #import "../clients/TWAPIClient.h"
 
@@ -16,6 +19,8 @@
 @property (strong, nonatomic) TWTweetCell *offScreenCell;
 
 @property (strong, nonatomic) NSMutableArray *tweetList;
+@property (strong, nonatomic) TWUser *currentUser;
+
 @end
 
 @implementation TWTimelineTableViewController
@@ -41,7 +46,16 @@
     [self.tableView addSubview:refreshControl];
     
     self.tweetList = [[NSMutableArray alloc]init];
+    [[TWAPIClient instance]currentUser:^(TWUser *user) {
+        self.currentUser = user;
+    }];
+    [self.navigationController setNavigationBarHidden:YES];
     [self showHomeTimelineFromTweetIdAndNewer:nil newer:NO];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 -(void)showHomeTimelineFromTweetIdAndNewer :(NSString *)tweetIndex newer:(BOOL)newer
@@ -102,77 +116,45 @@
     if (_offScreenCell == nil) {
         _offScreenCell = [[TWTweetCell alloc]init];
     }
-    TWTweet * tweet = [[TWTweet alloc]init];
-    NSMutableString *tweetStr = [[NSMutableString alloc]initWithString:@"How did this get made?!"];
-    for (int i = 0; i < indexPath.row; i++) {
-        [tweetStr appendString:@" hpoe"];
-    }
-    tweet.text = [NSString stringWithString:tweetStr];
-    [_offScreenCell setTweet:tweet];
+    [_offScreenCell setTweet:self.tweetList[indexPath.row]];
 
     [_offScreenCell.contentView layoutSubviews];
-    CGSize contentViewSize = [_offScreenCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    //CGSize contentViewSize = [_offScreenCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
 
     UIFont *font = [UIFont boldSystemFontOfSize:15];
     CGSize maxLabelSize = CGSizeMake(232, 9999);
     CGRect expectedLabelSize = [_offScreenCell.tweet.text boundingRectWithSize:maxLabelSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: font} context:nil ];
     
     //return contentViewSize.height + expectedLabelSize.size.height;
-    return 150;
+    return expectedLabelSize.size.height + 45;
 }
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Table view delegate
 
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
+    TWTweetDetailViewController *detailViewController = [[TWTweetDetailViewController alloc] initWithNibName:@"TWTweetDetailViewController" bundle:nil];
+    detailViewController.tweet = self.tweetList[indexPath.row];
     
     // Push the view controller.
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
-*/
+
+- (IBAction)signOut:(id)sender {
+    [[TWAPIClient instance]deauthorize];
+    self.currentUser = nil;
+    
+    TWLandingViewController *landingViewController = [[TWLandingViewController alloc] initWithNibName:@"TWLandingViewController" bundle:nil];
+    
+    // Push the view controller.
+    [self.navigationController pushViewController:landingViewController animated:YES];
+}
+
+- (IBAction)compose:(id)sender {
+    TWTweetComposeViewController *composeViewController = [[TWTweetComposeViewController alloc] initWithNibName:@"TWTweetComposeViewController" bundle:nil];
+    
+    [composeViewController setCurrentUser:self.currentUser];
+    [self.navigationController pushViewController:composeViewController animated:YES];
+}
 
 @end

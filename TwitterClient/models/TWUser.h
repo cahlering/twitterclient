@@ -10,8 +10,8 @@
 
 @interface TWUser : MUJSONResponseObject
 
-@property (weak, nonatomic) NSString *name;
-@property (weak, nonatomic) NSString *screenName;
-@property (weak, nonatomic) NSString *profileImage;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *screenName;
+@property (strong, nonatomic) NSString *profileImage;
 
 @end
