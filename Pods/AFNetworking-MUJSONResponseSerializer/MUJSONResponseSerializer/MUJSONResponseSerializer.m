@@ -62,8 +62,8 @@
         // default
         if(![self dateFormatter])
         {
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateStyle:NSDateFormatterFullStyle];
+            self.dateFormatter = [[NSDateFormatter alloc] init];
+            [self.dateFormatter setDateStyle:NSDateFormatterFullStyle];
         }
     }
     
