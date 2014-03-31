@@ -90,7 +90,7 @@
     [tweetSerializer setResponseObjectClass:[TWTweet class]];
     [self setResponseSerializer:tweetSerializer];
 
-    [self POST:@"1.1/statuses/update.json" parameters:@{@"status":status} constructingBodyWithBlock:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self POST:@"1.1/statuses/update.json" parameters:@{@"status":status} success:^(NSURLSessionDataTask *task, id responseObject) {
         callback((TWTweet *)responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error tweeting: %@", error);
@@ -103,7 +103,7 @@
     [tweetSerializer setResponseObjectClass:[TWTweet class]];
     [self setResponseSerializer:tweetSerializer];
     
-    [self POST:[NSString stringWithFormat:@"%@/%lld.json", @"1.1/statuses/retweet", tweet.id] parameters:nil constructingBodyWithBlock:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self POST:[NSString stringWithFormat:@"%@/%lld.json", @"1.1/statuses/retweet", tweet.id] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         callback((TWTweet *)responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error reTweeting: %@", error);
@@ -118,7 +118,7 @@
     [tweetSerializer setResponseObjectClass:[TWTweet class]];
     [self setResponseSerializer:tweetSerializer];
     
-    [self POST:[NSString stringWithFormat:@"1.1/favorites/%@.json", (remove) ? @"destroy" : @"create" ] parameters:@{@"id": @(tweet.id)} constructingBodyWithBlock:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self POST:[NSString stringWithFormat:@"1.1/favorites/%@.json", (remove) ? @"destroy" : @"create" ] parameters:@{@"id": @(tweet.id)} success:^(NSURLSessionDataTask *task, id responseObject) {
         callback((TWTweet *)responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error favoriting: %@", error);
