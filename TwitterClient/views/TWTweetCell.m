@@ -104,4 +104,17 @@
     return [NSString stringWithFormat:@"%d%@", intervalValue, intervalName];
 }
 
+- (CGFloat) cellHeight
+{
+    UIFont *font = self.tweetLabel.font;
+    CGSize maxLabelSize = CGSizeMake(self.tweetLabel.frame.size.width, 9999);
+    CGRect expectedLabelSize = [_tweet.text boundingRectWithSize:maxLabelSize
+                                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                                      attributes:@{NSFontAttributeName: font}
+                                                         context:nil ];
+    
+    return expectedLabelSize.size.height + 70;
+    
+}
+
 @end

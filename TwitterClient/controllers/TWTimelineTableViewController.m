@@ -114,21 +114,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if (_offScreenCell == nil) {
-        _offScreenCell = [[TWTweetCell alloc]init];
+        _offScreenCell = [tableView dequeueReusableCellWithIdentifier:@"TWTweetCell"];
     }
+
     [_offScreenCell setTweet:self.tweetList.tweets[indexPath.row]];
 
-    [_offScreenCell.contentView layoutSubviews];
-    //CGSize contentViewSize = [_offScreenCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-
-    UIFont *font = [UIFont boldSystemFontOfSize:15];
-    CGSize maxLabelSize = CGSizeMake(232, 9999);
-    CGRect expectedLabelSize = [_offScreenCell.tweet.text boundingRectWithSize:maxLabelSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: font} context:nil ];
-    
-    //return contentViewSize.height + expectedLabelSize.size.height;
-    return expectedLabelSize.size.height + 45;
+    return [_offScreenCell cellHeight];
 }
 
 #pragma mark - Table view delegate

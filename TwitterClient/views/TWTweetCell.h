@@ -13,4 +13,6 @@
 
 @property (weak, nonatomic) TWTweet *tweet;
 
+-(CGFloat) cellHeight;
+
 @end
