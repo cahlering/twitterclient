@@ -16,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *statusInput;
-@property (weak, nonatomic) IBOutlet UILabel *inReplyLabel;
 
 @end
 
@@ -49,12 +48,9 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     if (_inReplyTo) {
-        self.inReplyLabel.hidden = NO;
         self.statusInput.text = [NSString stringWithFormat:@"@%@ ", _inReplyTo.user.screenName];
-        [self.statusInput becomeFirstResponder];
-    } else {
-        self.inReplyLabel.hidden = YES;
     }
+    [self.statusInput becomeFirstResponder];
     
 }
 

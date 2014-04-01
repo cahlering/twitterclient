@@ -6,7 +6,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TWTweetComposeViewController">
             <connections>
-                <outlet property="inReplyLabel" destination="Adh-bv-5Pz" id="JqY-Oa-wUb"/>
                 <outlet property="nameLabel" destination="noM-yB-rDY" id="DOc-7k-M5m"/>
                 <outlet property="profileImage" destination="6rV-6Q-BPH" id="5ic-lO-pKV"/>
                 <outlet property="statusInput" destination="zaw-4g-cxR" id="iEV-2T-pKA"/>
@@ -82,13 +81,6 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="REPLY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Adh-bv-5Pz">
-                    <rect key="frame" x="123" y="63" width="52" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
