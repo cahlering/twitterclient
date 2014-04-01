@@ -47,9 +47,18 @@
     NSURLRequest *profileImageRequest = [NSURLRequest requestWithURL:profileImageURL];
     UIImage *placeHolderImage = [UIImage imageNamed:@"loading"];
     
-    if (tweet.favorited) self.favoriteImage.image = [UIImage imageNamed:@"favorite_on"];
-    if (tweet.retweeted) self.retweetImage.image = [UIImage imageNamed:@"retweet_on"];
-    self.timeLabel.text = tweet.createdAt.description;
+    //force the else clauses to prevent images from persisting becuase of cell re-use
+    if (tweet.favorited) {
+        self.favoriteImage.image = [UIImage imageNamed:@"favorite_on"];
+    } else {
+        self.favoriteImage.image = [UIImage imageNamed:@"favorite"];
+    }
+    if (tweet.retweeted) {
+        self.retweetImage.image = [UIImage imageNamed:@"retweet_on"];
+    } else {
+        self.retweetImage.image = [UIImage imageNamed:@"retweet"];
+    }
+    self.timeLabel.text = [self timeSinceTweet];
 
     
     [self.profileImageControl setImageWithURLRequest:profileImageRequest placeholderImage:placeHolderImage success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -58,6 +67,41 @@
         nil;
     }];
 
+}
+
+- (NSString *)timeSinceTweet
+{
+    NSDate *now = [[NSDate alloc]init];
+    NSDate *tweetTime = _tweet.createdAt;
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit
+                                               fromDate:tweetTime
+                                                 toDate:now
+                                                options:0];
+    
+    NSString *intervalName;
+    int intervalValue = 0;
+    if (components.year > 0 ) {
+        intervalName = @"y";
+        intervalValue = components.year;
+    } else if (components.month > 0) {
+        intervalName = @"mo";
+        intervalValue = components.month;
+    } else if (components.day > 0) {
+        intervalName = @"d";
+        intervalValue = components.day;
+    } else if (components.hour > 0) {
+        intervalName = @"hr";
+        intervalValue = components.hour;
+    } else if (components.minute > 0) {
+        intervalName = @"m";
+        intervalValue = components.minute;
+    } else {
+        intervalName = @"s";
+        intervalValue = components.second;
+    }
+    return [NSString stringWithFormat:@"%d%@", intervalValue, intervalName];
 }
 
 @end

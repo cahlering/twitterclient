@@ -23,10 +23,14 @@
 
 - (void) tweet: (NSString *)status :(void (^)(TWTweet *tweet))callback;
 
+- (void) getTweet: (NSString *)tweetId :(void (^)(TWTweet *tweet))callback;
+
+- (void) unReTweet: (TWTweet *)tweetToRetweet :(void (^)(TWTweet *tweet))callback;
+
 - (void) reTweet: (TWTweet *)tweetToRetweet :(void (^)(TWTweet *tweet))callback;
 
 - (void) favorite: (TWTweet *)tweetToFavorite remove:(BOOL)remove :(void (^)(TWTweet *tweet))callback;
 
-- (void) tweetAsReply: (NSString *)status :(void (^)(TWTweet *tweet))callback;
+- (void) tweetAsReply: (NSString *)status replyToId:(NSString *)replyToId :(void (^)(TWTweet *tweet))callback;
 
 @end

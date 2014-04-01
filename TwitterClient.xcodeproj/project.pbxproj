@@ -12,6 +12,7 @@
 		950C489C18E8F05300F8CDCD /* TWTweetDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950C489A18E8F05300F8CDCD /* TWTweetDetailViewController.xib */; };
 		950C48A018E8FEB600F8CDCD /* TWTweetComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 950C489E18E8FEB600F8CDCD /* TWTweetComposeViewController.m */; };
 		950C48A118E8FEB600F8CDCD /* TWTweetComposeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950C489F18E8FEB600F8CDCD /* TWTweetComposeViewController.xib */; };
+		953C623F18EB068A00E8B743 /* TWTweetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 953C623E18EB068A00E8B743 /* TWTweetContainer.m */; };
 		95868D2518E73F38001778E4 /* TWLandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95868D2318E73F38001778E4 /* TWLandingViewController.m */; };
 		95868D2618E73F38001778E4 /* TWLandingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95868D2418E73F38001778E4 /* TWLandingViewController.xib */; };
 		95868D2A18E73FC5001778E4 /* TWTimelineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95868D2818E73FC5001778E4 /* TWTimelineTableViewController.m */; };
@@ -56,6 +57,8 @@
 		950C489D18E8FEB600F8CDCD /* TWTweetComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWTweetComposeViewController.h; path = controllers/TWTweetComposeViewController.h; sourceTree = "<group>"; };
 		950C489E18E8FEB600F8CDCD /* TWTweetComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWTweetComposeViewController.m; path = controllers/TWTweetComposeViewController.m; sourceTree = "<group>"; };
 		950C489F18E8FEB600F8CDCD /* TWTweetComposeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TWTweetComposeViewController.xib; path = controllers/TWTweetComposeViewController.xib; sourceTree = "<group>"; };
+		953C623D18EB068A00E8B743 /* TWTweetContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWTweetContainer.h; path = models/TWTweetContainer.h; sourceTree = "<group>"; };
+		953C623E18EB068A00E8B743 /* TWTweetContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWTweetContainer.m; path = models/TWTweetContainer.m; sourceTree = "<group>"; };
 		95868D2218E73F38001778E4 /* TWLandingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWLandingViewController.h; path = controllers/TWLandingViewController.h; sourceTree = "<group>"; };
 		95868D2318E73F38001778E4 /* TWLandingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWLandingViewController.m; path = controllers/TWLandingViewController.m; sourceTree = "<group>"; };
 		95868D2418E73F38001778E4 /* TWLandingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TWLandingViewController.xib; path = controllers/TWLandingViewController.xib; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				95868D3018E749E6001778E4 /* TWTweet.m */,
 				95868D4018E788F7001778E4 /* TWUser.h */,
 				95868D4118E788F7001778E4 /* TWUser.m */,
+				953C623D18EB068A00E8B743 /* TWTweetContainer.h */,
+				953C623E18EB068A00E8B743 /* TWTweetContainer.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -381,6 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				953C623F18EB068A00E8B743 /* TWTweetContainer.m in Sources */,
 				95CC40B818E3CE27001D1812 /* main.m in Sources */,
 				95868D2518E73F38001778E4 /* TWLandingViewController.m in Sources */,
 				95CC40BC18E3CE27001D1812 /* TWAppDelegate.m in Sources */,

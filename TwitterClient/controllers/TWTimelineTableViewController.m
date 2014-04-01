@@ -12,13 +12,14 @@
 #import "TWTweetComposeViewController.h"
 #import "../views/TWTweetCell.h"
 #import "../clients/TWAPIClient.h"
+#import "../models/TWTweetContainer.h"
 
 @interface TWTimelineTableViewController ()
 
 
 @property (strong, nonatomic) TWTweetCell *offScreenCell;
 
-@property (strong, nonatomic) NSMutableArray *tweetList;
+@property (strong, nonatomic) TWTweetContainer *tweetList;
 @property (strong, nonatomic) TWUser *currentUser;
 
 @end
@@ -45,7 +46,7 @@
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
     [self.tableView addSubview:refreshControl];
     
-    self.tweetList = [[NSMutableArray alloc]init];
+    self.tweetList = [TWTweetContainer instance];
     [[TWAPIClient instance]currentUser:^(TWUser *user) {
         self.currentUser = user;
     }];
@@ -56,12 +57,13 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:YES];
+    [self.tableView reloadData];
 }
 
 -(void)showHomeTimelineFromTweetIdAndNewer :(NSString *)tweetIndex newer:(BOOL)newer
 {
     [[TWAPIClient instance]homeTimelineWithIndexAndBefore:tweetIndex before:newer :^(NSArray *tweets) {
-        [self.tweetList addObjectsFromArray:tweets];
+        [self.tweetList.tweets addObjectsFromArray:tweets];
         [self.tableView reloadData];
     }];
     
@@ -70,12 +72,12 @@
 -(void)refresh:(UIRefreshControl *)refreshControl
 {
     NSLog(@"Refresh");
-    TWTweet *newestTweet = [self.tweetList objectAtIndex:0];
+    TWTweet *newestTweet = [self.tweetList.tweets objectAtIndex:0];
     
     [[TWAPIClient instance]homeTimelineWithIndexAndBefore:[newestTweet idString] before:NO :^(NSArray *tweets) {
         NSMutableArray *newTweets = [tweets mutableCopy];
-        [newTweets addObjectsFromArray:self.tweetList];
-        self.tweetList = newTweets;
+        [newTweets addObjectsFromArray:self.tweetList.tweets];
+        self.tweetList.tweets = newTweets;
         [self.tableView reloadData];
         [refreshControl endRefreshing];
     }];
@@ -98,14 +100,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.tweetList count];
+    return [self.tweetList.tweets count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWTweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TWTweetCell" forIndexPath:indexPath];
     
-    TWTweet *tweet = [self.tweetList objectAtIndex:indexPath.row];
+    TWTweet *tweet = [self.tweetList.tweets objectAtIndex:indexPath.row];
     [cell setTweet:tweet];
     return cell;
 }
@@ -116,7 +118,7 @@
     if (_offScreenCell == nil) {
         _offScreenCell = [[TWTweetCell alloc]init];
     }
-    [_offScreenCell setTweet:self.tweetList[indexPath.row]];
+    [_offScreenCell setTweet:self.tweetList.tweets[indexPath.row]];
 
     [_offScreenCell.contentView layoutSubviews];
     //CGSize contentViewSize = [_offScreenCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
@@ -134,7 +136,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWTweetDetailViewController *detailViewController = [[TWTweetDetailViewController alloc] initWithNibName:@"TWTweetDetailViewController" bundle:nil];
-    detailViewController.tweet = self.tweetList[indexPath.row];
+    detailViewController.tweet = self.tweetList.tweets[indexPath.row];
+    detailViewController.currentUser = self.currentUser;
     
     // Push the view controller.
     [self.navigationController pushViewController:detailViewController animated:YES];

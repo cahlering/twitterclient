@@ -84,6 +84,19 @@
     }];
 }
 
+-(void)getTweet:(NSString *)tweetId :(void (^)(TWTweet *))callback
+{
+    MUJSONResponseSerializer *tweetSerializer = [[MUJSONResponseSerializer alloc]init];
+    [tweetSerializer setResponseObjectClass:[TWTweet class]];
+    [self setResponseSerializer:tweetSerializer];
+    
+    [self GET:@"1.1/statuses/show.json" parameters:@{@"id":tweetId, @"include_my_retweet":@(YES)} success:^(NSURLSessionDataTask *task, id responseObject) {
+        callback((TWTweet *)responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error tweeting: %@", error);
+    }];
+}
+
 - (void)tweet:(NSString *)status :(void (^)(TWTweet *tweets))callback
 {
     MUJSONResponseSerializer *tweetSerializer = [[MUJSONResponseSerializer alloc]init];
@@ -97,6 +110,19 @@
     }];
 }
 
+- (void) tweetAsReply:(NSString *)status replyToId:(NSString *)replyToId :(void (^)(TWTweet *))callback
+{
+    MUJSONResponseSerializer *tweetSerializer = [[MUJSONResponseSerializer alloc]init];
+    [tweetSerializer setResponseObjectClass:[TWTweet class]];
+    [self setResponseSerializer:tweetSerializer];
+    
+    [self POST:@"1.1/statuses/update.json" parameters:@{@"status":status, @"in_reply_to_status_id":replyToId} success:^(NSURLSessionDataTask *task, id responseObject) {
+        callback((TWTweet *)responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error replying: %@", error);
+    }];
+}
+
 - (void)reTweet:(TWTweet *)tweet :(void (^)(TWTweet *))callback
 {
     MUJSONResponseSerializer *tweetSerializer = [[MUJSONResponseSerializer alloc]init];
@@ -104,6 +130,21 @@
     [self setResponseSerializer:tweetSerializer];
     
     [self POST:[NSString stringWithFormat:@"%@/%lld.json", @"1.1/statuses/retweet", tweet.id] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        callback((TWTweet *)responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error reTweeting: %@", error);
+    }];
+    
+}
+- (void)unReTweet:(TWTweet *)tweet :(void (^)(TWTweet *))callback
+{
+    MUJSONResponseSerializer *tweetSerializer = [[MUJSONResponseSerializer alloc]init];
+    [tweetSerializer setResponseObjectClass:[TWTweet class]];
+    [self setResponseSerializer:tweetSerializer];
+    
+    NSNumber *idNum = [tweet.currentUserRetweet objectForKey:@"id"];
+    long long longTweetId = [idNum longLongValue];
+    [self POST:[NSString stringWithFormat:@"%@/%lld.json", @"1.1/statuses/destroy", longTweetId] parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         callback((TWTweet *)responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error reTweeting: %@", error);

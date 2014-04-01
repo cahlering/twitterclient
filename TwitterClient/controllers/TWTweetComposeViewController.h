@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "../models/TWUser.h"
+#import "../models/TWTweet.h"
 #import "UIImageView+AFNetworking.h"
 
 @interface TWTweetComposeViewController : UIViewController
 
 @property (strong, nonatomic) TWUser *currentUser;
+@property (weak, nonatomic) TWTweet *inReplyTo;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "TWTweetComposeViewController.h"
 #import "../clients/TWAPIClient.h"
+#import "../models/TWTweetContainer.h"
 
 @interface TWTweetComposeViewController ()
 
@@ -15,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *statusInput;
+@property (weak, nonatomic) IBOutlet UILabel *inReplyLabel;
 
 @end
 
@@ -46,6 +48,14 @@
     }];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
+    if (_inReplyTo) {
+        self.inReplyLabel.hidden = NO;
+        self.statusInput.text = [NSString stringWithFormat:@"@%@ ", _inReplyTo.user.screenName];
+        [self.statusInput becomeFirstResponder];
+    } else {
+        self.inReplyLabel.hidden = YES;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,10 +70,17 @@
 
 - (IBAction)submitStatus:(id)sender
 {
-    [[TWAPIClient instance]tweet:self.statusInput.text :^(TWTweet *tweet) {
-        //need a delegate to pass this to the home view
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
+    if (_inReplyTo) {
+        [[TWAPIClient instance]tweetAsReply:self.statusInput.text replyToId:_inReplyTo.idString :^(TWTweet *tweet) {
+            [[TWTweetContainer instance].tweets insertObject:tweet atIndex:0];
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    } else {
+        [[TWAPIClient instance]tweet:self.statusInput.text :^(TWTweet *tweet) {
+            [[TWTweetContainer instance].tweets insertObject:tweet atIndex:0];
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    }
 }
 
 @end

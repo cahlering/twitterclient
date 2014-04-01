@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "../models/TWUser.h"
 #import "../models/TWTweet.h"
 
 @interface TWTweetDetailViewController : UIViewController
 
-@property (weak, atomic) TWTweet *tweet;
+@property (strong, atomic) TWUser *currentUser;
+@property (strong, atomic) TWTweet *tweet;
 
 @end
