@@ -55,9 +55,9 @@
     if (index) {
         NSString *indexParameterName;
         if (before) {
-            indexParameterName = @"max_id";
-        } else {
             indexParameterName = @"since_id";
+        } else {
+            indexParameterName = @"max_id";
         }
         callParameters = @{indexParameterName : index};
     }

@@ -16,11 +16,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bZW-6S-p4Q">
-                    <rect key="frame" x="0.0" y="67" width="320" height="492"/>
+                    <rect key="frame" x="0.0" y="67" width="320" height="481"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="492" id="2Gk-G3-3wk"/>
+                        <constraint firstAttribute="height" constant="481" id="2Gk-G3-3wk"/>
                         <constraint firstAttribute="width" constant="320" id="VNp-JJ-50g"/>
                     </constraints>
                     <connections>

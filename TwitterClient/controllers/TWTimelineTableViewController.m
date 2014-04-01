@@ -107,6 +107,10 @@
 {
     TWTweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TWTweetCell" forIndexPath:indexPath];
     
+    if (indexPath.row >= self.tweetList.tweets.count - 1) {
+        [self showHomeTimelineFromTweetIdAndNewer:((TWTweet *)self.tweetList.tweets.lastObject).idString newer:NO];
+    }
+    
     TWTweet *tweet = [self.tweetList.tweets objectAtIndex:indexPath.row];
     [cell setTweet:tweet];
     return cell;
