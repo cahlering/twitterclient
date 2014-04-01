@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *statusInput;
+@property (weak, nonatomic) IBOutlet UILabel *remainingCharactersLabel;
 
 @end
 
@@ -50,6 +51,7 @@
     if (_inReplyTo) {
         self.statusInput.text = [NSString stringWithFormat:@"@%@ ", _inReplyTo.user.screenName];
     }
+    [self textView:self.statusInput shouldChangeTextInRange:NSRangeFromString(@"") replacementText:@"" ];
     [self.statusInput becomeFirstResponder];
     
 }
@@ -77,6 +79,12 @@
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }
+}
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    self.remainingCharactersLabel.text = [NSString stringWithFormat:@"%d", 140 - textView.text.length];
+    return YES;
 }
 
 @end

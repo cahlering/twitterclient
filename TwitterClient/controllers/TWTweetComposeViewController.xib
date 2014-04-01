@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="nameLabel" destination="noM-yB-rDY" id="DOc-7k-M5m"/>
                 <outlet property="profileImage" destination="6rV-6Q-BPH" id="5ic-lO-pKV"/>
+                <outlet property="remainingCharactersLabel" destination="DyH-Ze-V30" id="w6s-sr-Qwn"/>
                 <outlet property="statusInput" destination="zaw-4g-cxR" id="iEV-2T-pKA"/>
                 <outlet property="usernameLabel" destination="6OS-hd-Pit" id="1x8-9o-FRl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -28,6 +29,9 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="NrJ-dT-KIF"/>
+                    </connections>
                 </textView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6rV-6Q-BPH">
                     <rect key="frame" x="16" y="78" width="55" height="55"/>
@@ -81,6 +85,13 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyH-Ze-V30">
+                    <rect key="frame" x="212" y="30" width="42" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.10910023822406821" green="0.52234019797075792" blue="0.8828125" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>

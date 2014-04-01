@@ -11,7 +11,7 @@
 #import "../models/TWTweet.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface TWTweetComposeViewController : UIViewController
+@interface TWTweetComposeViewController : UIViewController <UITextViewDelegate>
 
 @property (strong, nonatomic) TWUser *currentUser;
 @property (weak, nonatomic) TWTweet *inReplyTo;
