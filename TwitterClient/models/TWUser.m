@@ -14,7 +14,12 @@
     if (self = [super init]) {
         self.propertyMap = @{
                              @"screen_name": @"screenName",
-                             @"profile_image_url": @"profileImage"
+                             @"profile_image_url": @"profileImage",
+                             @"profile_background_image_url": @"profileBackgroundImageUrl",
+                             @"followers_count": @"followersCount",
+                             @"favorites_count": @"favoritesCount",
+                             @"statuses_count": @"tweetsCount",
+                             @"friends_count": @"friendsCount"
                              };
     }
     return self;

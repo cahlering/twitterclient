@@ -12,6 +12,7 @@
 @interface TWTweetCell : UITableViewCell
 
 @property (weak, nonatomic) TWTweet *tweet;
+@property (weak, nonatomic) UINavigationController *currentNavigationController;
 
 -(CGFloat) cellHeight;
 

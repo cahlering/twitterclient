@@ -21,6 +21,8 @@
 
 - (void) currentUser :(void (^)(TWUser *user))callback;
 
+- (void) getUserWithScreenName :(NSString *)screenName :(void (^)(TWUser *user))callback;
+
 - (void) tweet: (NSString *)status :(void (^)(TWTweet *tweet))callback;
 
 - (void) getTweet: (NSString *)tweetId :(void (^)(TWTweet *tweet))callback;

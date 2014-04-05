@@ -84,6 +84,20 @@
     }];
 }
 
+-(void)getUserWithScreenName :(NSString *)screenName :(void (^)(TWUser *user))callback
+{
+    
+    MUJSONResponseSerializer *userSerializer = [[MUJSONResponseSerializer alloc]init];
+    [userSerializer setResponseObjectClass:[TWUser class]];
+    [self setResponseSerializer:userSerializer];
+    
+    [self GET:@"1.1/users/show.json" parameters:@{@"screen_name": screenName} success:^(NSURLSessionDataTask *task, id responseObject) {
+        callback((TWUser *)responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"Error getting account: %@", error);
+    }];
+}
+
 -(void)getTweet:(NSString *)tweetId :(void (^)(TWTweet *))callback
 {
     MUJSONResponseSerializer *tweetSerializer = [[MUJSONResponseSerializer alloc]init];

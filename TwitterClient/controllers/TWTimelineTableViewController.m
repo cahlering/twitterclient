@@ -113,6 +113,7 @@
     
     TWTweet *tweet = [self.tweetList.tweets objectAtIndex:indexPath.row];
     [cell setTweet:tweet];
+    [cell setCurrentNavigationController:self.navigationController];
     return cell;
 }
 
@@ -154,6 +155,15 @@
     
     [composeViewController setCurrentUser:self.currentUser];
     [self.navigationController pushViewController:composeViewController animated:YES];
+}
+
+- (IBAction)onPan:(UIPanGestureRecognizer *)recognizer {
+    
+    CGPoint translation = [recognizer translationInView:self.view];
+    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
+                                         recognizer.view.center.y + translation.y);
+    [recognizer setTranslation:CGPointMake(0, 0) inView:self.view];
+    
 }
 
 @end

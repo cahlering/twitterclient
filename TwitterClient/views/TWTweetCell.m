@@ -7,6 +7,7 @@
 //
 
 #import "TWTweetCell.h"
+#import "TWProfileViewController.h"
 #import "UIImageView+AFNetworking.h"
 
 @interface TWTweetCell()
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *retweetImage;
 @property (weak, nonatomic) IBOutlet UIImageView *favoriteImage;
     
+- (IBAction)profileTap:(UITapGestureRecognizer *)sender;
 @end
 
 @implementation TWTweetCell
@@ -66,6 +68,10 @@
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         nil;
     }];
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(profileTap:)];
+    [tapRecognizer setNumberOfTapsRequired:1];
+    [_profileImageControl addGestureRecognizer:tapRecognizer];
 
 }
 
@@ -117,4 +123,9 @@
     
 }
 
+- (IBAction)profileTap:(UITapGestureRecognizer *)sender {
+    TWProfileViewController *profileView = [[TWProfileViewController alloc]init];
+    [profileView setUser:_tweet.user];
+    [_currentNavigationController pushViewController:profileView animated:YES];
+}
 @end
