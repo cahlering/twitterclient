@@ -84,7 +84,7 @@
     }];
 }
 
--(void)getUserWithScreenName :(NSString *)screenName :(void (^)(TWUser *user))callback
+-(void)getUserWithScreenName :(NSString *)screenName andBannerImages:(BOOL)andBannerImages :(void (^)(TWUser *user))callback
 {
     
     MUJSONResponseSerializer *userSerializer = [[MUJSONResponseSerializer alloc]init];
@@ -92,10 +92,33 @@
     [self setResponseSerializer:userSerializer];
     
     [self GET:@"1.1/users/show.json" parameters:@{@"screen_name": screenName} success:^(NSURLSessionDataTask *task, id responseObject) {
-        callback((TWUser *)responseObject);
+        TWUser *retrievedUser = (TWUser *)responseObject;
+        if (andBannerImages) {
+            [self getProfileBannersWithScreenName:screenName :^(TWUserBannerImages *images) {
+                [retrievedUser setBannerImages:(TWUserBannerImages *)responseObject];
+            } :^{
+                ;
+            }];
+        }
+        callback(retrievedUser);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Error getting account: %@", error);
     }];
+}
+
+- (void) getProfileBannersWithScreenName :(NSString *)screenName :(void (^)(TWUserBannerImages *images))callback :(void (^)()) errorCallback
+{
+    MUJSONResponseSerializer *profileSerializer = [[MUJSONResponseSerializer alloc]init];
+    [profileSerializer setResponseObjectClass:[TWUserBannerImages class]];
+    [self setResponseSerializer:profileSerializer];
+    
+    [self GET:@"1.1/users/profile_banner.json" parameters:@{@"screen_name": screenName} success:^(NSURLSessionDataTask *task, id responseObject) {
+        callback((TWUserBannerImages*) responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        errorCallback();
+        NSLog(@"Error getting profile banners: %@", error);
+    }];
+    
 }
 
 -(void)getTweet:(NSString *)tweetId :(void (^)(TWTweet *))callback

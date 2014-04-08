@@ -21,7 +21,9 @@
 
 - (void) currentUser :(void (^)(TWUser *user))callback;
 
-- (void) getUserWithScreenName :(NSString *)screenName :(void (^)(TWUser *user))callback;
+- (void) getUserWithScreenName :(NSString *)screenName andBannerImages:(BOOL)andBannerImages :(void (^)(TWUser *user))callback;
+
+- (void) getProfileBannersWithScreenName :(NSString *)screenName :(void (^)(TWUserBannerImages *images))callback :(void (^)())errorCallback;
 
 - (void) tweet: (NSString *)status :(void (^)(TWTweet *tweet))callback;
 

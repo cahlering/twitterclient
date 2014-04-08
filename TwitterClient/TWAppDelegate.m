@@ -7,9 +7,10 @@
 //
 
 #import "TWAppDelegate.h"
-#import "clients/TWAPIClient.h"
-#import "controllers/TWLandingViewController.h"
-#import "controllers/TWTimelineTableViewController.h"
+#import "TWAPIClient.h"
+#import "TWLandingViewController.h"
+#import "TWTimelineTableViewController.h"
+#import "TWHamburgerMenuController.h"
 
 @implementation TWAppDelegate
 
@@ -22,7 +23,7 @@
 
     UINavigationController *rvc;
     if ([[TWAPIClient instance] isAuthorized]) {
-        rvc = [[UINavigationController alloc]initWithRootViewController:[[TWTimelineTableViewController alloc]init]];
+        rvc = [[UINavigationController alloc]initWithRootViewController:[[TWHamburgerMenuController alloc]init]];
     } else {
         rvc = [[UINavigationController alloc]initWithRootViewController:[[TWLandingViewController alloc]init]];
     }

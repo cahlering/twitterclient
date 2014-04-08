@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TWUser.h"
 
-@interface TWProfileViewController : UIViewController<UIGestureRecognizerDelegate>
+@interface TWProfileViewController : UIViewController<UIGestureRecognizerDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) TWUser *user;
 

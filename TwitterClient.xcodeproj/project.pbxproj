@@ -38,6 +38,9 @@
 		95CC40C718E3CE27001D1812 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95CC40AF18E3CE27001D1812 /* UIKit.framework */; };
 		95CC40CF18E3CE27001D1812 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95CC40CD18E3CE27001D1812 /* InfoPlist.strings */; };
 		95CC40D118E3CE27001D1812 /* TwitterClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CC40D018E3CE27001D1812 /* TwitterClientTests.m */; };
+		95CDFDFF18F2F4FE0034A98F /* TWUserBannerImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CDFDFE18F2F4FE0034A98F /* TWUserBannerImages.m */; };
+		95CDFE4818F3451B0034A98F /* TWHamburgerMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CDFE4618F3451B0034A98F /* TWHamburgerMenuController.m */; };
+		95CDFE4918F3451B0034A98F /* TWHamburgerMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95CDFE4718F3451B0034A98F /* TWHamburgerMenuController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +100,11 @@
 		95CC40CC18E3CE27001D1812 /* TwitterClientTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TwitterClientTests-Info.plist"; sourceTree = "<group>"; };
 		95CC40CE18E3CE27001D1812 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		95CC40D018E3CE27001D1812 /* TwitterClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwitterClientTests.m; sourceTree = "<group>"; };
+		95CDFDFD18F2F4FE0034A98F /* TWUserBannerImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWUserBannerImages.h; path = models/TWUserBannerImages.h; sourceTree = "<group>"; };
+		95CDFDFE18F2F4FE0034A98F /* TWUserBannerImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWUserBannerImages.m; path = models/TWUserBannerImages.m; sourceTree = "<group>"; };
+		95CDFE4518F3451B0034A98F /* TWHamburgerMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWHamburgerMenuController.h; path = controllers/TWHamburgerMenuController.h; sourceTree = "<group>"; };
+		95CDFE4618F3451B0034A98F /* TWHamburgerMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWHamburgerMenuController.m; path = controllers/TWHamburgerMenuController.m; sourceTree = "<group>"; };
+		95CDFE4718F3451B0034A98F /* TWHamburgerMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TWHamburgerMenuController.xib; path = controllers/TWHamburgerMenuController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +170,9 @@
 				953C624D18ED297D00E8B743 /* TWProfileViewController.h */,
 				953C624E18ED297D00E8B743 /* TWProfileViewController.m */,
 				953C624F18ED297D00E8B743 /* TWProfileViewController.xib */,
+				95CDFE4518F3451B0034A98F /* TWHamburgerMenuController.h */,
+				95CDFE4618F3451B0034A98F /* TWHamburgerMenuController.m */,
+				95CDFE4718F3451B0034A98F /* TWHamburgerMenuController.xib */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -175,6 +186,8 @@
 				95868D4118E788F7001778E4 /* TWUser.m */,
 				953C623D18EB068A00E8B743 /* TWTweetContainer.h */,
 				953C623E18EB068A00E8B743 /* TWTweetContainer.m */,
+				95CDFDFD18F2F4FE0034A98F /* TWUserBannerImages.h */,
+				95CDFDFE18F2F4FE0034A98F /* TWUserBannerImages.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -342,6 +355,7 @@
 				95868D3E18E784BE001778E4 /* TWTweetCell.xib in Resources */,
 				950C48A118E8FEB600F8CDCD /* TWTweetComposeViewController.xib in Resources */,
 				95868D2618E73F38001778E4 /* TWLandingViewController.xib in Resources */,
+				95CDFE4918F3451B0034A98F /* TWHamburgerMenuController.xib in Resources */,
 				95868D3A18E78116001778E4 /* Media.xcassets in Resources */,
 				95CC40BE18E3CE27001D1812 /* Images.xcassets in Resources */,
 			);
@@ -396,9 +410,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				953C623F18EB068A00E8B743 /* TWTweetContainer.m in Sources */,
+				95CDFE4818F3451B0034A98F /* TWHamburgerMenuController.m in Sources */,
 				95CC40B818E3CE27001D1812 /* main.m in Sources */,
 				95868D2518E73F38001778E4 /* TWLandingViewController.m in Sources */,
 				953C625018ED297D00E8B743 /* TWProfileViewController.m in Sources */,
+				95CDFDFF18F2F4FE0034A98F /* TWUserBannerImages.m in Sources */,
 				95CC40BC18E3CE27001D1812 /* TWAppDelegate.m in Sources */,
 				95868D3F18E784BE001778E4 /* TWTweetCell.m in Sources */,
 				95868D2A18E73FC5001778E4 /* TWTimelineTableViewController.m in Sources */,

@@ -52,6 +52,7 @@
                 </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="18Q-rw-z9f" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="23" id="0Dk-vO-ldi"/>
                 <constraint firstItem="bZW-6S-p4Q" firstAttribute="top" secondItem="18Q-rw-z9f" secondAttribute="bottom" id="gQ0-am-BcE"/>

@@ -19,7 +19,8 @@
                              @"followers_count": @"followersCount",
                              @"favorites_count": @"favoritesCount",
                              @"statuses_count": @"tweetsCount",
-                             @"friends_count": @"friendsCount"
+                             @"friends_count": @"friendsCount",
+                             @"profile_banner_url": @"profileBannerUrl"
                              };
     }
     return self;
