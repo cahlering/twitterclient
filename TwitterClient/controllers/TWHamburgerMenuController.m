@@ -89,21 +89,22 @@
 
 - (IBAction)onPanAction:(UIPanGestureRecognizer *)recognizer {
     UIView *panningView = [[self getSelectedViewController]view];
-    CGPoint point    = [recognizer translationInView:self.view];
+    CGPoint point    = [recognizer translationInView:panningView];
     CGPoint velocity = [recognizer velocityInView:panningView];
     
     if (recognizer.state == UIGestureRecognizerStateChanged) {
-        float panX = point.x;
-        NSLog(@"%d - %f", recognizer.state , panX);
-        panningView.frame = CGRectMake(panningView.frame.origin.x + panX, 0, panningView.frame.size.width, panningView.frame.size.height);
+        panningView.center = CGPointMake(panningView.center.x + point.x, panningView.center.y + point.y);
+        [recognizer setTranslation:CGPointMake(0, 0) inView:panningView];
+        
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
         CGFloat viewWidth = panningView.frame.size.width;
-        float endX = (velocity.x > 0) ? viewWidth : -viewWidth;
+        float endX = (velocity.x > 0) ? viewWidth * 1.5 : -viewWidth / 2;
         if (_profileDisplayed) {
-            endX = 0;
+            endX = viewWidth / 2;
         }
         [UIView animateWithDuration:.5 animations:^{
-            panningView.frame = CGRectMake(endX, 0, viewWidth, panningView.frame.size.height);
+            NSLog(@"%d - %f", recognizer.state, endX );
+            panningView.center = CGPointMake(endX , panningView.frame.size.height / 2);
             _profileDisplayed = !_profileDisplayed;
         }];
     }
