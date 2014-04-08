@@ -56,6 +56,8 @@
     } else {
         [self initializeView];
     }
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+
 }
 
 - (void) initializeView

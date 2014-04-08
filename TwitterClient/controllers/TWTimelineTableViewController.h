@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TWTweetContainer.h"
 
 @interface TWTimelineTableViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+- (void) timelineType :(TimelineType)type;
 @end

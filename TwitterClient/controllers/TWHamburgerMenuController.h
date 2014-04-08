@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TWTweetContainer.h"
 
 @interface TWHamburgerMenuController : UIViewController
+
+@property (nonatomic, strong) NSMutableArray *viewControllers;
+
+- (void)showTimelineView :(TimelineType)type;
+
+- (void)showProfileView;
+
+- (void)showMenuView;
 
 @end

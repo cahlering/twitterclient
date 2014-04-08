@@ -12,5 +12,6 @@
 @interface TWProfileViewController : UIViewController<UIGestureRecognizerDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) TWUser *user;
+@property (weak, nonatomic) UINavigationController *myNavigationController;
 
 @end

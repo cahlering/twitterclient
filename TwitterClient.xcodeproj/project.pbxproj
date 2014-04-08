@@ -15,6 +15,8 @@
 		953C623F18EB068A00E8B743 /* TWTweetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 953C623E18EB068A00E8B743 /* TWTweetContainer.m */; };
 		953C625018ED297D00E8B743 /* TWProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 953C624E18ED297D00E8B743 /* TWProfileViewController.m */; };
 		953C625118ED297D00E8B743 /* TWProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 953C624F18ED297D00E8B743 /* TWProfileViewController.xib */; };
+		957F861018F43C7900157210 /* TWMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 957F860E18F43C7900157210 /* TWMenuController.m */; };
+		957F861118F43C7900157210 /* TWMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 957F860F18F43C7900157210 /* TWMenuController.xib */; };
 		95868D2518E73F38001778E4 /* TWLandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95868D2318E73F38001778E4 /* TWLandingViewController.m */; };
 		95868D2618E73F38001778E4 /* TWLandingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95868D2418E73F38001778E4 /* TWLandingViewController.xib */; };
 		95868D2A18E73FC5001778E4 /* TWTimelineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95868D2818E73FC5001778E4 /* TWTimelineTableViewController.m */; };
@@ -67,6 +69,9 @@
 		953C624D18ED297D00E8B743 /* TWProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWProfileViewController.h; path = controllers/TWProfileViewController.h; sourceTree = "<group>"; };
 		953C624E18ED297D00E8B743 /* TWProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWProfileViewController.m; path = controllers/TWProfileViewController.m; sourceTree = "<group>"; };
 		953C624F18ED297D00E8B743 /* TWProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TWProfileViewController.xib; path = controllers/TWProfileViewController.xib; sourceTree = "<group>"; };
+		957F860D18F43C7900157210 /* TWMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWMenuController.h; path = controllers/TWMenuController.h; sourceTree = "<group>"; };
+		957F860E18F43C7900157210 /* TWMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWMenuController.m; path = controllers/TWMenuController.m; sourceTree = "<group>"; };
+		957F860F18F43C7900157210 /* TWMenuController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TWMenuController.xib; path = controllers/TWMenuController.xib; sourceTree = "<group>"; };
 		95868D2218E73F38001778E4 /* TWLandingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWLandingViewController.h; path = controllers/TWLandingViewController.h; sourceTree = "<group>"; };
 		95868D2318E73F38001778E4 /* TWLandingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWLandingViewController.m; path = controllers/TWLandingViewController.m; sourceTree = "<group>"; };
 		95868D2418E73F38001778E4 /* TWLandingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TWLandingViewController.xib; path = controllers/TWLandingViewController.xib; sourceTree = "<group>"; };
@@ -173,6 +178,9 @@
 				95CDFE4518F3451B0034A98F /* TWHamburgerMenuController.h */,
 				95CDFE4618F3451B0034A98F /* TWHamburgerMenuController.m */,
 				95CDFE4718F3451B0034A98F /* TWHamburgerMenuController.xib */,
+				957F860D18F43C7900157210 /* TWMenuController.h */,
+				957F860E18F43C7900157210 /* TWMenuController.m */,
+				957F860F18F43C7900157210 /* TWMenuController.xib */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -357,6 +365,7 @@
 				95868D2618E73F38001778E4 /* TWLandingViewController.xib in Resources */,
 				95CDFE4918F3451B0034A98F /* TWHamburgerMenuController.xib in Resources */,
 				95868D3A18E78116001778E4 /* Media.xcassets in Resources */,
+				957F861118F43C7900157210 /* TWMenuController.xib in Resources */,
 				95CC40BE18E3CE27001D1812 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +431,7 @@
 				950C489B18E8F05300F8CDCD /* TWTweetDetailViewController.m in Sources */,
 				95868D3118E749E6001778E4 /* TWTweet.m in Sources */,
 				950C48A018E8FEB600F8CDCD /* TWTweetComposeViewController.m in Sources */,
+				957F861018F43C7900157210 /* TWMenuController.m in Sources */,
 				95868D2E18E74062001778E4 /* TWAPIClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

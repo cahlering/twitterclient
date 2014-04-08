@@ -27,7 +27,6 @@
 @implementation TWTimelineTableViewController
 
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,7 +50,7 @@
         self.currentUser = user;
     }];
     [self.navigationController setNavigationBarHidden:YES];
-    [self showHomeTimelineFromTweetIdAndNewer:nil newer:NO];
+    [self showTimelineFromTweetIdAndNewer:nil newer:NO];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -60,13 +59,20 @@
     [self.tableView reloadData];
 }
 
--(void)showHomeTimelineFromTweetIdAndNewer :(NSString *)tweetIndex newer:(BOOL)newer
+-(void)showTimelineFromTweetIdAndNewer :(NSString *)tweetIndex newer:(BOOL)newer
 {
-    [[TWAPIClient instance]homeTimelineWithIndexAndBefore:tweetIndex before:newer :^(NSArray *tweets) {
-        [self.tweetList.tweetsForTimeLine addObjectsFromArray:tweets];
-        [self.tableView reloadData];
-    }];
-    
+    //TODO: refactor this
+    if (_tweetList.timelineType == HOME) {
+        [[TWAPIClient instance]homeTimelineWithIndexAndBefore:tweetIndex before:newer :^(NSArray *tweets) {
+            [self.tweetList.tweetsForTimeLine addObjectsFromArray:tweets];
+            [self.tableView reloadData];
+        }];
+    } else {
+        [[TWAPIClient instance]mentionsTimelineWithIndexAndBefore:tweetIndex before:newer :^(NSArray *tweets) {
+            [self.tweetList.tweetsForTimeLine addObjectsFromArray:tweets];
+            [self.tableView reloadData];
+        }];
+    }
 }
 
 -(void)refresh:(UIRefreshControl *)refreshControl
@@ -108,8 +114,8 @@
 {
     TWTweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TWTweetCell" forIndexPath:indexPath];
     
-    if (indexPath.row >= self.tweetList.tweetsForTimeLine.count - 1) {
-        [self showHomeTimelineFromTweetIdAndNewer:((TWTweet *)self.tweetList.tweetsForTimeLine.lastObject).idString newer:NO];
+    if (indexPath.row >= self.tweetList.tweetsForTimeLine.count - 1 && indexPath.row >= 4) {
+        [self showTimelineFromTweetIdAndNewer:((TWTweet *)self.tweetList.tweetsForTimeLine.lastObject).idString newer:NO];
     }
     
     TWTweet *tweet = [self.tweetList.tweetsForTimeLine objectAtIndex:indexPath.row];
@@ -159,5 +165,10 @@
     [self.navigationController pushViewController:composeViewController animated:YES];
 }
 
+- (void) timelineType:(TimelineType)type
+{
+    [_tweetList setTimelineType:type];
+    [self showTimelineFromTweetIdAndNewer:nil newer:NO];
+}
 
 @end
