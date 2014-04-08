@@ -63,7 +63,7 @@
 -(void)showHomeTimelineFromTweetIdAndNewer :(NSString *)tweetIndex newer:(BOOL)newer
 {
     [[TWAPIClient instance]homeTimelineWithIndexAndBefore:tweetIndex before:newer :^(NSArray *tweets) {
-        [self.tweetList.tweets addObjectsFromArray:tweets];
+        [self.tweetList.tweetsForTimeLine addObjectsFromArray:tweets];
         [self.tableView reloadData];
     }];
     
@@ -72,12 +72,13 @@
 -(void)refresh:(UIRefreshControl *)refreshControl
 {
     NSLog(@"Refresh");
-    TWTweet *newestTweet = [self.tweetList.tweets objectAtIndex:0];
+    TWTweet *newestTweet = [self.tweetList.tweetsForTimeLine objectAtIndex:0];
     
     [[TWAPIClient instance]homeTimelineWithIndexAndBefore:[newestTweet idString] before:NO :^(NSArray *tweets) {
         NSMutableArray *newTweets = [tweets mutableCopy];
-        [newTweets addObjectsFromArray:self.tweetList.tweets];
-        self.tweetList.tweets = newTweets;
+        [newTweets addObjectsFromArray:self.tweetList.tweetsForTimeLine];
+        [self.tweetList.tweetsForTimeLine removeAllObjects];
+        [self.tweetList.tweetsForTimeLine addObjectsFromArray:newTweets];
         [self.tableView reloadData];
         [refreshControl endRefreshing];
     }];
@@ -100,18 +101,18 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.tweetList.tweets count];
+    return [self.tweetList.tweetsForTimeLine count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWTweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TWTweetCell" forIndexPath:indexPath];
     
-    if (indexPath.row >= self.tweetList.tweets.count - 1) {
-        [self showHomeTimelineFromTweetIdAndNewer:((TWTweet *)self.tweetList.tweets.lastObject).idString newer:NO];
+    if (indexPath.row >= self.tweetList.tweetsForTimeLine.count - 1) {
+        [self showHomeTimelineFromTweetIdAndNewer:((TWTweet *)self.tweetList.tweetsForTimeLine.lastObject).idString newer:NO];
     }
     
-    TWTweet *tweet = [self.tweetList.tweets objectAtIndex:indexPath.row];
+    TWTweet *tweet = [self.tweetList.tweetsForTimeLine objectAtIndex:indexPath.row];
     [cell setTweet:tweet];
     [cell setCurrentNavigationController:self.navigationController];
     return cell;
@@ -123,7 +124,8 @@
         _offScreenCell = [tableView dequeueReusableCellWithIdentifier:@"TWTweetCell"];
     }
 
-    [_offScreenCell setTweet:self.tweetList.tweets[indexPath.row]];
+    TWTweet *tweet = (TWTweet *)[self.tweetList.tweetsForTimeLine objectAtIndex:indexPath.row];
+    [_offScreenCell setTweet:tweet];
 
     return [_offScreenCell cellHeight];
 }
@@ -133,7 +135,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TWTweetDetailViewController *detailViewController = [[TWTweetDetailViewController alloc] initWithNibName:@"TWTweetDetailViewController" bundle:nil];
-    detailViewController.tweet = self.tweetList.tweets[indexPath.row];
+    detailViewController.tweet = self.tweetList.tweetsForTimeLine[indexPath.row];
     detailViewController.currentUser = self.currentUser;
     
     // Push the view controller.

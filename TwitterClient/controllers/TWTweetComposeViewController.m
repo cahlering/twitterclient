@@ -70,12 +70,12 @@
 {
     if (_inReplyTo) {
         [[TWAPIClient instance]tweetAsReply:self.statusInput.text replyToId:_inReplyTo.idString :^(TWTweet *tweet) {
-            [[TWTweetContainer instance].tweets insertObject:tweet atIndex:0];
+            [[TWTweetContainer instance].tweetsForTimeLine insertObject:tweet atIndex:0];
             [self.navigationController popViewControllerAnimated:YES];
         }];
     } else {
         [[TWAPIClient instance]tweet:self.statusInput.text :^(TWTweet *tweet) {
-            [[TWTweetContainer instance].tweets insertObject:tweet atIndex:0];
+            [[TWTweetContainer instance].tweetsForTimeLine insertObject:tweet atIndex:0];
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }

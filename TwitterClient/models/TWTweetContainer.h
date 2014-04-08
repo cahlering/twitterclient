@@ -9,11 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "TWTweet.h"
 
+typedef enum  {
+    HOME,
+    MENTION
+} TimelineType;
+
 @interface TWTweetContainer : NSObject
 
-@property (strong, nonatomic) NSMutableArray *tweets;
+@property (nonatomic) TimelineType timelineType;
 
 + (TWTweetContainer *) instance;
+
+- (NSMutableArray *) tweetsForTimeLine;
 
 - (TWTweet *)tweetById :(long long)tweetId;
 @end

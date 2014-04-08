@@ -8,6 +8,13 @@
 
 #import "TWTweetContainer.h"
 
+@interface TWTweetContainer()
+
+@property (strong, nonatomic) NSMutableArray *tweets;
+@property (strong, nonatomic) NSMutableArray *mentions;
+
+@end
+
 @implementation TWTweetContainer
 
 
@@ -19,6 +26,7 @@
     dispatch_once(&pred, ^{
         clientInstance = [[TWTweetContainer alloc]init];
         clientInstance.tweets = [NSMutableArray array];
+        clientInstance.mentions = [NSMutableArray array];
     });
     return clientInstance;
 }
@@ -32,6 +40,15 @@
         }
     }
     return nil;
+}
+
+- (NSMutableArray *) tweetsForTimeLine
+{
+    if (_timelineType == MENTION) {
+        return _mentions;
+    } else {
+        return _tweets;
+    }
 }
 
 @end
