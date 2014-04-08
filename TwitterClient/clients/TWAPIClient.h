@@ -19,6 +19,8 @@
 
 - (void) homeTimelineWithIndexAndBefore :(NSString*)index before:(BOOL)before :(void(^)(NSArray *tweets))callback;
 
+- (void) mentionsTimelineWithIndexAndBefore :(NSString*)index before:(BOOL)before :(void(^)(NSArray *tweets))callback;
+
 - (void) currentUser :(void (^)(TWUser *user))callback;
 
 - (void) getUserWithScreenName :(NSString *)screenName andBannerImages:(BOOL)andBannerImages :(void (^)(TWUser *user))callback;

@@ -46,7 +46,17 @@
 
 - (void)homeTimelineWithIndexAndBefore :(NSString *)index before:(BOOL)before :(void (^)(NSArray *tweets))callback
 {
-    
+    [self tweetsByTimelineWithIndexAndBefore:@"home" index:index before:before :callback];
+}
+
+- (void)mentionsTimelineWithIndexAndBefore :(NSString *)index before:(BOOL)before :(void (^)(NSArray *tweets))callback
+{
+    [self tweetsByTimelineWithIndexAndBefore:@"mentions" index:index before:before :callback];
+}
+
+- (void)tweetsByTimelineWithIndexAndBefore :(NSString *)timeline index:(NSString *)index before:(BOOL)before :(void (^)(NSArray *tweets))callback
+{
+
     MUJSONResponseSerializer *tweetSerializer = [[MUJSONResponseSerializer alloc]init];
     [tweetSerializer setResponseObjectClass:[TWTweet class]];
     [self setResponseSerializer:tweetSerializer];
@@ -62,7 +72,7 @@
         callParameters = @{indexParameterName : index};
     }
     
-    [self GET:@"1.1/statuses/home_timeline.json" parameters:callParameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self GET:[NSString stringWithFormat:@"1.1/statuses/%@_timeline.json", timeline] parameters:callParameters success:^(NSURLSessionDataTask *task, id responseObject) {
         callback(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"Timeline error: %@", error);
